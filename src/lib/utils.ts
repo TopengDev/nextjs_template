@@ -117,13 +117,16 @@ export function objectToQueryString(obj: Record<string, any>): string {
 
 // Array/Object Utils
 export function groupBy<T>(array: T[], key: keyof T): Record<string, T[]> {
-   return array.reduce((groups, item) => {
-      const groupKey = String(item[key]);
-      return {
-         ...groups,
-         [groupKey]: [...(groups[groupKey] || []), item],
-      };
-   }, {} as Record<string, T[]>);
+   return array.reduce(
+      (groups, item) => {
+         const groupKey = String(item[key]);
+         return {
+            ...groups,
+            [groupKey]: [...(groups[groupKey] || []), item],
+         };
+      },
+      {} as Record<string, T[]>,
+   );
 }
 
 export function debounce<T extends (...args: any[]) => any>(
@@ -141,51 +144,19 @@ export function deepClone<T>(obj: T): T {
    return JSON.parse(JSON.stringify(obj));
 }
 
-export function validateField({
-   value,
-   callback,
-   maxLength,
-   minLength,
-   required,
-   validator,
-}: {
-   value: string | string[] | number;
-   required?: boolean;
-   minLength?: number;
-   maxLength?: number;
-   validator?: (value: string | string[] | number) => TFormFieldValidation;
-   callback?: (validity: TFormFieldValidation) => void;
-}) {
-   let updatedValidity: TFormFieldValidation = { isValid: true, msg: '' };
-   switch (true) {
-      case required:
-         updatedValidity = {
-            isValid: !!String(value),
-            msg: `This field is required`,
-         };
-         break;
-      case typeof minLength === 'number':
-         updatedValidity = {
-            isValid: String(value).length >= minLength,
-            msg: `Minimum ${minLength} characters`,
-         };
-         break;
-      case typeof maxLength === 'number':
-         updatedValidity = {
-            isValid: String(value).length <= maxLength,
-            msg: `Maximum ${maxLength} characters`,
-         };
-         break;
-      case !!validator:
-         const validationResult = validator(value);
-         updatedValidity = {
-            isValid: validationResult.isValid,
-            msg: validationResult.msg || '',
-         };
-         break;
-      default:
-         updatedValidity = { isValid: true, msg: '' };
-   }
-   callback?.(updatedValidity);
-   return updatedValidity;
+export function formatThousands(
+   num: number | string,
+   separatedBy?: 'dot' | 'comma',
+): string {
+   const n = typeof num === 'string' ? parseFloat(num) : num;
+
+   if (isNaN(n)) return '0';
+
+   const locale =
+      separatedBy === 'dot'
+         ? 'id-ID'
+         : separatedBy === 'comma'
+           ? 'en-US'
+           : 'id-ID';
+   return n.toLocaleString(locale);
 }

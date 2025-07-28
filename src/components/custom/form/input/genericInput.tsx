@@ -2,7 +2,7 @@
 
 import { FormField } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { validateField } from '@/lib/utils';
+import { validateField } from '@/components/custom/form/utils';
 import { useEffect, useState } from 'react';
 
 export function GenericInput<TFormData>({
@@ -126,9 +126,9 @@ export function GenericInput<TFormData>({
                   (masker && !focused
                      ? maskedValue
                      : type === 'number'
-                     ? numberString ||
-                       String(value || formData?.[fieldName] || '')
-                     : value || formData?.[fieldName] || '') as string
+                       ? numberString ||
+                         String(value || formData?.[fieldName] || '')
+                       : value || formData?.[fieldName] || '') as string
                }
                onChange={(e) => {
                   handleChange(e.target.value);

@@ -10,7 +10,8 @@ import {
    SelectValue,
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
-import { cn, validateField } from '@/lib/utils';
+import { cn } from '@/lib/utils';
+import { validateField } from '@/components/custom/form/utils';
 import { ChevronDownIcon } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 export function SelectInput<TFormData>({
