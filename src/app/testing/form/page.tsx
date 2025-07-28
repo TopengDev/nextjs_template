@@ -21,47 +21,6 @@ function Component() {
    const { formData, actions, statesDispatch, formValidations, states } =
       useForm();
 
-   // useEffect(() => {
-   //    registerFields([
-   //       {
-   //          type: 'text',
-   //          fieldName: 'name',
-   //          label: 'Name',
-   //       },
-   //       {
-   //          isFlexContainer: true,
-   //          containerName: 'email-password',
-   //          fields: [
-   //             {
-   //                type: 'email',
-   //                fieldName: 'email',
-   //                label: 'Email',
-   //             },
-   //             {
-   //                type: 'password',
-   //                fieldName: 'password',
-   //                label: 'Password',
-   //             },
-   //          ],
-   //       },
-   //       {
-   //          type: 'select',
-   //          fieldName: 'gender',
-   //          label: 'gender',
-   //          options: [
-   //             {
-   //                label: 'Male',
-   //                value: 'M',
-   //             },
-   //             {
-   //                label: 'Female',
-   //                value: 'F',
-   //             },
-   //          ],
-   //       },
-   //    ]);
-   // }, []);
-
    async function optionsFetcher(): Promise<TSelectOption[]> {
       return new Promise((resolve, reject) => {
          setTimeout(() => {
@@ -78,6 +37,7 @@ function Component() {
                   { label: 'Option 8', value: '8' },
                   { label: 'Option 9', value: '9' },
                   { label: 'Option 10', value: '10' },
+                  { label: 'Option 11', value: '11' },
                ]);
             } else {
                reject('Error fetching data.');
