@@ -3,6 +3,11 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
+// Env & configs
+export function isProductionMode() {
+   return process.env.MODE === 'production';
+}
+
 // Styling
 export function cn(...inputs: ClassValue[]) {
    return twMerge(clsx(inputs));
